@@ -1,0 +1,20 @@
+from Bio import SeqIO
+from Bio.Seq import Seq
+import xlrd
+import os
+
+for i in range(51):
+    fname = "/Users/zhouwenbin/proj/Fluidigm_matrix/Final_sequences/Ind" + str(i+1) + ".fasta"
+    if os.path.isfile(fname) == True:
+        path = "/Users/zhouwenbin/proj/Fluidigm_matrix/Final_sequences/Ind" + str(i + 1)
+        os.mkdir(path)
+        for test in SeqIO.parse(fname,'fasta'):
+            file = path + "/" + test.description[0:7]
+            print file
+            test.id = "Ind" +str(i+1)
+            test.description = "Ind" +str(i+1)
+            f1 = open(file, 'w')
+            SeqIO.write(test, f1, "fasta")
+            f1.close()
+
+    #name = "Ind"
